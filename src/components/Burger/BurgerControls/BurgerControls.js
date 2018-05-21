@@ -5,15 +5,17 @@ import styles from './BurgerControls.css';
 const products = [
     {label: 'Meat', type: 'meat'},
     {label: 'Cheese', type: 'cheese'},
-    {label: 'Salat', type: 'salat'},
+    {label: 'Salad', type: 'salad'},
     {label: 'Bacon', type: 'bacon'}
 ];
 
-const burgerControls = () => {
+const burgerControls = (props) => {
     return (
         <div className={styles.wrapper}>
             <div className={styles.burger_control_wrapper}>
-                {products.map((product) => <BurgerControl product={product}/>)}
+                {products.map((product) => <BurgerControl product={product}
+                                                          addProduct={props.addProduct}
+                                                          removeProduct={props.removeProduct}/>)}
             </div>
         </div>
     )

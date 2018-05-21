@@ -10,11 +10,31 @@ class BurgerBuilder extends React.Component {
         this.state = {
             ingridients: [
                 {product: 'bread-top', qty: 1},
+                {product: 'salad', qty: 1},
                 {product: 'cheese', qty: 3},
-                {product: 'meat', qty: 2},
+                {product: 'bacon', qty: 2},
+                {product: 'meat', qty: 0},
                 {product: 'bread-bottom', qty: 1}
             ]
         };
+    };
+
+    addProductHandler = (product) => {
+        let ingridients = [...this.state.ingridients];
+        let ingridientId = ingridients.findIndex((item)=> item.product == product);
+        ingridients[ingridientId].qty += 1;
+        this.setState({
+            ingridients: ingridients
+        });
+    };
+
+    removeProductHandler = (product) => {
+        let ingridients = [...this.state.ingridients];
+        let ingridientId = ingridients.findIndex((item)=> item.product == product);
+        if(ingridients[ingridientId].qty >= 1) ingridients[ingridientId].qty -= 1;
+        this.setState({
+            ingridients: ingridients
+        });
     };
 
 
@@ -22,7 +42,7 @@ class BurgerBuilder extends React.Component {
         return (
             <div>
                 <Burger ingridients={this.state.ingridients}/>
-                <BurgerControls/>
+                <BurgerControls addProduct={this.addProductHandler} removeProduct={this.removeProductHandler}/>
             </div>
         )
     }
