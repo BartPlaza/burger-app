@@ -1,5 +1,8 @@
 :local(.wrapper)
 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 100%;
     background-color: lightgray;
     padding: 20px 0 20px 0;
@@ -8,5 +11,10 @@
 :local(.burger_control_wrapper)
 {
     width: 20%;
-    margin:auto;
+    margin-right: 40px;
+}
+
+:local(.burger_price)
+{
+    font-size: 26px;
 }

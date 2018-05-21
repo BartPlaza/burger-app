@@ -17,6 +17,9 @@ const burgerControls = (props) => {
                                                           addProduct={props.addProduct}
                                                           removeProduct={props.removeProduct}/>)}
             </div>
+            <div className={styles.burger_price}>
+                Price: {props.totalPrice}$
+            </div>
         </div>
     )
 };
