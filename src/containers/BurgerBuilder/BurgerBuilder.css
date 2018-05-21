@@ -1,0 +1,41 @@
+:local(.manager_wrapper)
+{
+    background-color: white;
+    width: 50%;
+    height: 400px;
+    margin: auto;
+}
+
+:global(.head_dark)
+{
+    display: flex;
+    justify-content: space-between;
+    background-color: #F8F8F8;
+    border-top: 1px solid #E5E7E7;
+    border-bottom: 1px solid #E5E7E7;
+    padding: 15px 50px 15px 50px;
+    color: #707070;
+    border-top: 1px solid #E5E7E7;
+    border-bottom: 1px solid #E5E7E7;
+}
+
+:global(.ul_table)
+{
+    padding: 10px 40px 10px 40px;
+}
+
+
+:global(.ul_table_item)
+{
+    display: flex;
+    justify-content: space-between;
+    color: #707070;
+    padding: 10px;
+}
+
+:global(.ul_table_item:not(:last-child))
+{
+    border-bottom: 1px solid #E5E7E7;
+}
+
+

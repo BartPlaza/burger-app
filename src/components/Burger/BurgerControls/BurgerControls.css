@@ -1,0 +1,12 @@
+:local(.wrapper)
+{
+    width: 100%;
+    background-color: lightgray;
+    padding: 20px 0 20px 0;
+}
+
+:local(.burger_control_wrapper)
+{
+    width: 20%;
+    margin:auto;
+}

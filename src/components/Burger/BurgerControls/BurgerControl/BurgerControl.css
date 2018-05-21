@@ -1,0 +1,20 @@
+:local(.burger_control)
+{
+    display: flex;
+    justify-content: space-between;
+    padding: 5px;
+}
+
+:local(.burger_control button)
+{
+    background-color: lightsalmon;
+    color: white;
+    padding: 5px;
+    margin-left: 10px;
+}
+
+:local(.burger_control button:hover)
+{
+    cursor: pointer;
+    background-color: salmon;
+}
