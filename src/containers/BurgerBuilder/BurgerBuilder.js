@@ -51,7 +51,7 @@ class BurgerBuilder extends React.Component {
             let newPrice = this.state.totalPrice - ingridientPrice;
             this.setState({
                 ingridients: ingridients,
-                totalPrice: newPrice
+                totalPrice: newPriceTest
             });
         }
     };
