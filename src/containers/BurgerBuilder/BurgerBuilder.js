@@ -16,7 +16,8 @@ class BurgerBuilder extends React.Component {
                 {product: 'meat', qty: 0, price: 2},
                 {product: 'bread-bottom', qty: 1, price: 2}
             ],
-            totalPrice: 0
+            totalPrice: 0,
+            pucharsable: false
         };
     };
 
@@ -26,8 +27,20 @@ class BurgerBuilder extends React.Component {
             return total + (product.qty * product.price);
         },0);
         this.setState({
-            totalPrice: price
+            totalPrice: price,
         });
+        this.checkPucharsable(ingridients);
+    }
+
+    checkPucharsable(ingridients){
+        let products = ingridients.reduce((total, product)=>{
+            return total + product.qty;
+        },0);
+        console.log(products);
+        let pucharsable = products >= 4 ? true : false;
+        this.setState({
+            pucharsable: pucharsable
+        })
     }
 
     addProductHandler = (product) => {
@@ -36,10 +49,12 @@ class BurgerBuilder extends React.Component {
         let ingridientPrice = ingridients[ingridientId].price;
         let newPrice = this.state.totalPrice + ingridientPrice;
         ingridients[ingridientId].qty += 1;
+        let products = this.state.pucharsable += 1;
         this.setState({
             ingridients: ingridients,
-            totalPrice: newPrice
+            totalPrice: newPrice,
         });
+        this.checkPucharsable(ingridients);
     };
 
     removeProductHandler = (product) => {
@@ -51,16 +66,30 @@ class BurgerBuilder extends React.Component {
             let newPrice = this.state.totalPrice - ingridientPrice;
             this.setState({
                 ingridients: ingridients,
-                totalPrice: newPriceTest
+                totalPrice: newPrice
             });
+            this.checkPucharsable(ingridients);
         }
     };
 
     render() {
+        const ingridients = [...this.state.ingridients];
+        let disabledStatuses = {};
+        ingridients.forEach((product)=>{
+            let item = product.product;
+            let isDisabled = product.qty <= 0 ? true : false;
+            disabledStatuses[item] = isDisabled;
+        });
+
         return (
             <div>
                 <Burger ingridients={this.state.ingridients}/>
-                <BurgerControls totalPrice={this.state.totalPrice} addProduct={this.addProductHandler} removeProduct={this.removeProductHandler}/>
+                <BurgerControls totalPrice={this.state.totalPrice}
+                                addProduct={this.addProductHandler}
+                                removeProduct={this.removeProductHandler}
+                                ingridientsState={disabledStatuses}
+                                pucharsable={this.state.pucharsable}
+                />
             </div>
         )
     }

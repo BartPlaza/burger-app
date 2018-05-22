@@ -18,3 +18,9 @@
     cursor: pointer;
     background-color: salmon;
 }
+
+:local(.burger_control button:disabled)
+{
+    background-color: grey;
+    cursor: not-allowed;
+}
