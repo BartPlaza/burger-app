@@ -21,7 +21,7 @@ const burgerControls = (props) => {
                 <div className={styles.burger_price}>
                     <span hidden={!props.pucharsable}>Price: {props.totalPrice}$</span>
                     <p className={styles.pucharse_error} hidden={props.pucharsable}>Add min 2 products</p>
-                    <button className={styles.order_button} disabled={!props.pucharsable}>
+                    <button className={styles.order_button} disabled={!props.pucharsable} onClick={props.showSummary}>
                         ORDER NOW <i className="fas fa-utensils"></i>
                     </button>
                 </div>

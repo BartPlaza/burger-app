@@ -2,6 +2,7 @@ import React from 'react';
 import Burger from '../../components/Burger/Burger';
 import BurgerControls from '../../components/Burger/BurgerControls/BurgerControls';
 import styles from './BurgerBuilder.css';
+import BurgerSummary from "../../components/Burger/BurgerSummary/BurgerSummary";
 
 class BurgerBuilder extends React.Component {
 
@@ -17,7 +18,8 @@ class BurgerBuilder extends React.Component {
                 {product: 'bread-bottom', qty: 1, price: 2}
             ],
             totalPrice: 0,
-            pucharsable: false
+            pucharsable: false,
+            showSummary: false
         };
     };
 
@@ -72,23 +74,30 @@ class BurgerBuilder extends React.Component {
         }
     };
 
+    showSummary = ()=>{
+      this.setState({
+          showSummary: true
+      });
+    };
+
     render() {
         const ingridients = [...this.state.ingridients];
         let disabledStatuses = {};
         ingridients.forEach((product)=>{
             let item = product.product;
-            let isDisabled = product.qty <= 0 ? true : false;
-            disabledStatuses[item] = isDisabled;
+            disabledStatuses[item] = product.qty <= 0;
         });
 
         return (
             <div>
+                <BurgerSummary ingridients={this.state.ingridients} totalPrice={this.state.totalPrice} isModalVisible={this.state.showSummary}/>
                 <Burger ingridients={this.state.ingridients}/>
                 <BurgerControls totalPrice={this.state.totalPrice}
                                 addProduct={this.addProductHandler}
                                 removeProduct={this.removeProductHandler}
                                 ingridientsState={disabledStatuses}
                                 pucharsable={this.state.pucharsable}
+                                showSummary = {this.showSummary}
                 />
             </div>
         )
