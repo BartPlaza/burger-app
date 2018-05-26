@@ -7,7 +7,6 @@ class Burger extends React.Component {
 
     constructor(props) {
         super(props);
-        //console.log(props.ingridients);
     }
 
     render() {
@@ -19,9 +18,6 @@ class Burger extends React.Component {
                 ingridients.push(<BurgerIngridient type={ingridient.product}/>);
             }
         });
-
-        console.log(ingridients);
-
 
         return (
             <div className={styles.burger}>

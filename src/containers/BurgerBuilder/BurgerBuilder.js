@@ -23,22 +23,21 @@ class BurgerBuilder extends React.Component {
         };
     };
 
-    componentDidMount(){
+    componentDidMount() {
         let ingridients = [...this.state.ingridients];
-        let price = ingridients.reduce((total, product)=>{
+        let price = ingridients.reduce((total, product) => {
             return total + (product.qty * product.price);
-        },0);
+        }, 0);
         this.setState({
             totalPrice: price,
         });
         this.checkPucharsable(ingridients);
     }
 
-    checkPucharsable(ingridients){
-        let products = ingridients.reduce((total, product)=>{
+    checkPucharsable(ingridients) {
+        let products = ingridients.reduce((total, product) => {
             return total + product.qty;
-        },0);
-        console.log(products);
+        }, 0);
         let pucharsable = products >= 4 ? true : false;
         this.setState({
             pucharsable: pucharsable
@@ -47,7 +46,7 @@ class BurgerBuilder extends React.Component {
 
     addProductHandler = (product) => {
         let ingridients = [...this.state.ingridients];
-        let ingridientId = ingridients.findIndex((item)=> item.product == product);
+        let ingridientId = ingridients.findIndex((item) => item.product == product);
         let ingridientPrice = ingridients[ingridientId].price;
         let newPrice = this.state.totalPrice + ingridientPrice;
         ingridients[ingridientId].qty += 1;
@@ -61,8 +60,8 @@ class BurgerBuilder extends React.Component {
 
     removeProductHandler = (product) => {
         let ingridients = [...this.state.ingridients];
-        let ingridientId = ingridients.findIndex((item)=> item.product == product);
-        if(ingridients[ingridientId].qty >= 1) {
+        let ingridientId = ingridients.findIndex((item) => item.product == product);
+        if (ingridients[ingridientId].qty >= 1) {
             ingridients[ingridientId].qty -= 1;
             let ingridientPrice = ingridients[ingridientId].price;
             let newPrice = this.state.totalPrice - ingridientPrice;
@@ -74,32 +73,41 @@ class BurgerBuilder extends React.Component {
         }
     };
 
-    showSummary = ()=>{
-      this.setState({
-          showSummary: true
-      });
+    showSummary = () => {
+        this.setState({
+            showSummary: true
+        });
+    };
+
+    hideSummary = () => {
+        this.setState({
+            showSummary: false
+        });
     };
 
     render() {
         const ingridients = [...this.state.ingridients];
         let disabledStatuses = {};
-        ingridients.forEach((product)=>{
+        ingridients.forEach((product) => {
             let item = product.product;
             disabledStatuses[item] = product.qty <= 0;
         });
 
         return (
-            <div>
-                <BurgerSummary ingridients={this.state.ingridients} totalPrice={this.state.totalPrice} isModalVisible={this.state.showSummary}/>
+            <React.Fragment>
+                <BurgerSummary ingridients={this.state.ingridients}
+                               totalPrice={this.state.totalPrice}
+                               isModalVisible={this.state.showSummary}
+                               hideModalHandler = {this.hideSummary}/>
                 <Burger ingridients={this.state.ingridients}/>
                 <BurgerControls totalPrice={this.state.totalPrice}
                                 addProduct={this.addProductHandler}
                                 removeProduct={this.removeProductHandler}
                                 ingridientsState={disabledStatuses}
                                 pucharsable={this.state.pucharsable}
-                                showSummary = {this.showSummary}
+                                showSummary={this.showSummary}
                 />
-            </div>
+            </React.Fragment>
         )
     }
 }

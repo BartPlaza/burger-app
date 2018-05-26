@@ -1,3 +1,9 @@
+:local(.builder_container)
+{
+
+}
+
+
 :local(.manager_wrapper)
 {
     background-color: white;
